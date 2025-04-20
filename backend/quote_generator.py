@@ -23,7 +23,8 @@ class ChatClient:
     def __init__(self, base_url: str, api_key: str):
         self.client = OpenAI(base_url=base_url, api_key=api_key)
 
-    def get_chat_completion(self, content: str, model: str = "deepseek-ai/DeepSeek-V3-0324", max_tokens: int = 512) -> str:
+    model_str="deepseek-ai/DeepSeek-V3-0324"
+    def get_chat_completion(self, content: str, model: str = "deepseek/deepseek-r1-turbo", max_tokens: int = 512) -> str:
         try:
             logging.info("Sending request to chat model...")
             completion = self.client.chat.completions.create(
@@ -53,7 +54,8 @@ class App:
             raise ValueError("HF_API_KEY not found in environment variables.")
         
         self.chat_client = ChatClient(
-            base_url="https://router.huggingface.co/hyperbolic/v1",
+            # base_url="https://router.huggingface.co/hyperbolic/v1",
+            base_url="https://router.huggingface.co/novita/v3/openai",
             api_key=api_key
         )
 
